@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Constants.h"
+//#import "Constants.h"
 #import "HTTPRiot.h"
 
 typedef void(^Foursquare2Callback)(BOOL success, id result);

@@ -47,7 +47,7 @@
 + (void)initialize
 {
 	[self setFormat:HRDataFormatJSON];
-	[self setDelegate:self];
+	[self setDelegate:(NSObject *)self];
 	[self setBaseURL:[NSURL URLWithString:@"https://api.foursquare.com/v2/"]];
 	NSUserDefaults *usDef = [NSUserDefaults standardUserDefaults];
 	if ([usDef objectForKey:@"access_token"] != nil) {
@@ -60,7 +60,7 @@
 	NSMutableDictionary *dic = [NSMutableDictionary dictionary];
 	[dic setObject:code forKey:@"code"];
 	[dic setObject:@"authorization_code" forKey:@"grant_type"];
-	[dic setObject:REDIRECT_URL forKey:@"redirect_uri"];
+	[dic setObject:kFoursquareRedirectUrl forKey:@"redirect_uri"];
 	[self get:@"oauth2/access_token" withParams:dic callback:callback];
 }
 
@@ -894,8 +894,8 @@
 +(NSDictionary*)generateFinalParamsFor:(NSDictionary *)params 
 {	
 	NSMutableDictionary *dict = [NSMutableDictionary new];
-	[dict setObject:OAUTH_KEY forKey:@"client_id"];
-	[dict setObject:OAUTH_SECRET forKey:@"client_secret"];
+	[dict setObject:kFoursquareOAuthConsumerKey forKey:@"client_id"];
+	[dict setObject:kFoursquareOAuthConsumerSecret forKey:@"client_secret"];
 	NSString *accessToken  = [[self classAttributes] objectForKey:@"access_token"];
 	if ([accessToken length] > 0)
 		[dict setObject:accessToken forKey:@"oauth_token"];

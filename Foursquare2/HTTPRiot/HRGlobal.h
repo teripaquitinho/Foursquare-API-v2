@@ -57,7 +57,7 @@ typedef enum {
 
 /// HTTPRiot's error domain
 #define HTTPRiotErrorDomain @"com.labratrevenge.HTTPRiot.ErrorDomain"
-#define DEBUG
+//#define DEBUG
 #ifdef DEBUG
 /// Logging Helper
 #define HRLOG NSLog
