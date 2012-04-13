@@ -37,7 +37,16 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
 	[super loadView];
-	webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 320, 480)];
+
+	UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] 
+									initWithTitle:@"Cancel"
+									style:UIBarButtonItemStyleBordered
+									target:self
+									action:@selector(cancel)];
+	
+	self.navigationItem.leftBarButtonItem=leftBtn;
+	
+    webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 320, 480)];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:_url]];
 	[webView loadRequest:request];
 	[webView setDelegate:self];
