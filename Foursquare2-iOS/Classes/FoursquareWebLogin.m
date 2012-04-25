@@ -38,11 +38,11 @@
 - (void)loadView {
 	[super loadView];
 
-	UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] 
+	UIBarButtonItem *leftBtn = [[[UIBarButtonItem alloc] 
 									initWithTitle:@"Cancel"
 									style:UIBarButtonItemStyleBordered
 									target:self
-									action:@selector(cancel)];
+									action:@selector(cancel)] autorelease];
 	
 	self.navigationItem.leftBarButtonItem=leftBtn;
 	

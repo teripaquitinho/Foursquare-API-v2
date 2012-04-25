@@ -688,16 +688,16 @@
 #else
 +(void)addPhoto:(UIImage*)photo
 #endif
-	  toCheckin:(NSString*)checkinID
-			tip:(NSString*)tipID
-		  venue:(NSString*)venueID
-	  broadcast:(FoursquareBroadcastType)broadcast
-	   latitude:(NSString*)lat
-	  longitude:(NSString*)lon
-	 accuracyLL:(NSString*)accuracyLL
-	   altitude:(NSString*)altitude
-	accuracyAlt:(NSString*)accuracyAlt
-	   callback:(Foursquare2Callback)callback;
+toCheckin:(NSString*)checkinID
+tip:(NSString*)tipID
+venue:(NSString*)venueID
+broadcast:(FoursquareBroadcastType)broadcast
+latitude:(NSString*)lat
+longitude:(NSString*)lon
+accuracyLL:(NSString*)accuracyLL
+altitude:(NSString*)altitude
+accuracyAlt:(NSString*)accuracyAlt
+callback:(Foursquare2Callback)callback;
 {
 	if (!checkinID && !tipID && !venueID) {
 		callback(NO,nil);
@@ -893,7 +893,7 @@
 
 +(NSDictionary*)generateFinalParamsFor:(NSDictionary *)params 
 {	
-	NSMutableDictionary *dict = [NSMutableDictionary new];
+	NSMutableDictionary *dict = [[[NSMutableDictionary alloc] init] autorelease];
 	[dict setObject:kFoursquareOAuthConsumerKey forKey:@"client_id"];
 	[dict setObject:kFoursquareOAuthConsumerSecret forKey:@"client_secret"];
 	NSString *accessToken  = [[self classAttributes] objectForKey:@"access_token"];
@@ -915,7 +915,7 @@
 	     httpMethod:(NSString *)httpMethod
 		   callback:(Foursquare2Callback)callback
 {
-	callback = [callback copy];
+	callback = [[callback copy] autorelease];
 	
 	NSMutableDictionary *options = [NSMutableDictionary dictionary];
 	
@@ -941,7 +941,7 @@
 #endif
 			   callback:(Foursquare2Callback)callback
 {
-	callback = [callback copy];
+	callback = [[callback copy] autorelease];
 	NSMutableDictionary *options = [NSMutableDictionary dictionary];
 	NSString *path = [NSString stringWithFormat:@"/%@", methodName];
 	[options setValue:[NSNumber numberWithInt:33] forKey:kHRClassAttributesFormatKey];
@@ -953,12 +953,12 @@
 #ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
 	NSArray *reps = [image representations];
 	NSData *data = [NSBitmapImageRep representationOfImageRepsInArray:reps 
-																 usingType:NSJPEGFileType
-																properties:nil];
+                                                            usingType:NSJPEGFileType
+                                                           properties:nil];
 #else
 	NSData *data = UIImageJPEGRepresentation(image,1.0);
 #endif
-	 
+    
 	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",@"0xKhTmLbOuNdArY"] dataUsingEncoding:NSUTF8StringEncoding]];
 	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data\"; filename=\"photo.jpeg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
 	[postBody appendData:[[NSString stringWithString:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
