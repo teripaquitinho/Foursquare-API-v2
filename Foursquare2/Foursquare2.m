@@ -915,7 +915,7 @@ callback:(Foursquare2Callback)callback;
 	     httpMethod:(NSString *)httpMethod
 		   callback:(Foursquare2Callback)callback
 {
-	callback = [[callback copy] autorelease];
+	callback = [callback copy];
 	
 	NSMutableDictionary *options = [NSMutableDictionary dictionary];
 	
@@ -941,7 +941,7 @@ callback:(Foursquare2Callback)callback;
 #endif
 			   callback:(Foursquare2Callback)callback
 {
-	callback = [[callback copy] autorelease];
+	callback = [callback copy];
 	NSMutableDictionary *options = [NSMutableDictionary dictionary];
 	NSString *path = [NSString stringWithFormat:@"/%@", methodName];
 	[options setValue:[NSNumber numberWithInt:33] forKey:kHRClassAttributesFormatKey];
