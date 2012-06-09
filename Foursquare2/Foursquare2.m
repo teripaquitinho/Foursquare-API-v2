@@ -900,6 +900,12 @@ callback:(Foursquare2Callback)callback;
 	if ([accessToken length] > 0)
 		[dict setObject:accessToken forKey:@"oauth_token"];
 	
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"ddMMyyyy"];
+    NSString *textDate = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:[NSDate date]]];
+    NSLog(@"Date %@",textDate);    
+    [dict setObject:textDate forKey:@"v"]; //v=20120604
+    
 	if (params) {
 		for (id key in params) {
 			id val = [params objectForKey:key];

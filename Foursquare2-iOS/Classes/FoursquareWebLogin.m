@@ -53,11 +53,17 @@
 	[self.view addSubview:webView];
 	[webView release];
 	
-
 }
 
 -(void)cancel{
-	[self dismissModalViewControllerAnimated:YES];
+    NSLog(@"Foursquare login cancel");
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotifFoursquareFailed object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotifProviderCancel object:nil userInfo:nil];
+    
+    [self setDelegate:nil];
+    
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
