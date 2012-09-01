@@ -65,9 +65,12 @@
 }
 
 +(void)setAccessToken:(NSString*)token{
-	[[self classAttributes] setObject:token forKey:@"access_token"];
-	[[NSUserDefaults standardUserDefaults]setObject:token forKey:@"access_token"];
-	[[NSUserDefaults standardUserDefaults]synchronize];
+    if (token)
+    {
+        [[self classAttributes] setObject:token forKey:@"access_token"];
+        [[NSUserDefaults standardUserDefaults]setObject:token forKey:@"access_token"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
 }
 
 +(void)removeAccessToken{
@@ -966,8 +969,8 @@ callback:(Foursquare2Callback)callback;
 #endif
     
 	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",@"0xKhTmLbOuNdArY"] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data\"; filename=\"photo.jpeg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[[NSString stringWithString:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[@"Content-Disposition: form-data; name=\"data\"; filename=\"photo.jpeg\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 	[postBody appendData:[NSData dataWithData:data]];
 	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",@"0xKhTmLbOuNdArY"] dataUsingEncoding:NSUTF8StringEncoding]];
 	

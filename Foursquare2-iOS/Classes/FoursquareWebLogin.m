@@ -68,7 +68,11 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
 	NSString *url =[[request URL] absoluteString];
-	if ([url rangeOfString:@"code="].length != 0) {
+
+	if ([url rangeOfString:@"facebook.com"].location != NSNotFound)
+        return YES; //ignore Facebook authentication
+
+    if ([url rangeOfString:@"code="].length != 0) {
 		
 		NSHTTPCookie *cookie;
 		NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
