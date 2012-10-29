@@ -32,7 +32,7 @@
 extern NSString * SBJSONErrorDomain;
 
 
-enum {
+/*enum {
     EUNSUPPORTED = 1,
     EPARSENUM,
     EPARSE,
@@ -45,7 +45,7 @@ enum {
     ETRAILGARBAGE,
     EEOF,
     EINPUT
-};
+};*/
 
 /**
  @brief Common base class for parsing & writing.
